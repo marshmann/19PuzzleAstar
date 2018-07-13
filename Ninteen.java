@@ -115,14 +115,14 @@ public class Ninteen {
 		//set heuristic to be "the sum of the x distance and y distance from the number's ideal spot"
 		int h = 0;
 		for(int i = 0; i < 6; i++) {
-			for( int j = 0; j < 6; j++) {
-				int val = state[i][j];
-				//ignore empty spaces
-				if(val != -1 || val != 0) {
-					int[] coord = idealSpot(val);
-					h += Math.abs((coord[0])-j)+Math.abs((coord[1])-i);
-				}
+		    for( int j = 0; j < 6; j++) {
+			int val = state[i][j];
+			//ignore empty spaces
+			if(val != -1 || val != 0) {
+			    int[] coord = idealSpot(val);
+			    h += Math.abs((coord[0])-j)+Math.abs((coord[1])-i);
 			}
+		    }
 		}
 		return h;
 	}
@@ -165,24 +165,24 @@ public class Ninteen {
 		int value = 0;		
 		//initialize the rest of the board
 		for(int y = 0; y < 6; y++) {
-			for(int x = 0; x < 6 ; x++) {
-				if(board[y][x] == 0) {
-					value = sc.nextInt();
-					if(unique.contains(value)) {
-						System.out.println("Error: Duplicate Number");
-						System.exit(0);
-					}
-					else {
-						//Save the position of the zero loc so we don't need to find it later.
-						if(value == 0) {
-							initZeroX = x; 
-							initZeroY = y;
-						}
-						board[y][x] = value;						
-						unique.add(value);
-					}
+		    for(int x = 0; x < 6 ; x++) {
+			if(board[y][x] == 0) {
+         		    value = sc.nextInt();
+			    if(unique.contains(value)) {
+				System.out.println("Error: Duplicate Number");
+				System.exit(0);
+			    }
+			    else {
+	 	                //Save the position of the zero loc so we don't need to find it later.
+				if(value == 0) {
+				    initZeroX = x; 
+				    initZeroY = y;
 				}
+    			        board[y][x] = value;						
+			        unique.add(value);
+			    }
 			}
+		    }
 		}
 		sc.close();
 		System.out.println();
@@ -198,9 +198,9 @@ public class Ninteen {
 	private static int[][] cloneArr(int[][] arr){
 		int[][] clone = new int[6][6];
 		for(int i =0; i < 6; i++) {
-			for(int j = 0; j < 6; j++) {
-				clone[i][j]=arr[i][j];
-			}
+		    for(int j = 0; j < 6; j++) {
+			clone[i][j]=arr[i][j];
+		    }
 		}
 		return clone;
 	}
@@ -222,28 +222,28 @@ public class Ninteen {
 	private static ArrayList<State> getNeighbors(Node n) {
 		ArrayList<State> neighbors = new ArrayList<State>();
 		if(validNeighbor(n.zeroy-1,n.zerox,n.state)) {
-			State child = new State(swap(n,n.zerox,n.zeroy-1));
-			//Node child = new Node(swap(n,n.zerox,n.zeroy-1), n.zerox, n.zeroy-1, n, n.state[n.zeroy-1][n.zerox]);
-			//child.g=child.parent.g+1;
-			neighbors.add(child);
+		    State child = new State(swap(n,n.zerox,n.zeroy-1));
+		    //Node child = new Node(swap(n,n.zerox,n.zeroy-1), n.zerox, n.zeroy-1, n, n.state[n.zeroy-1][n.zerox]);
+		    //child.g=child.parent.g+1;
+		    neighbors.add(child);
 		}
 		if(validNeighbor(n.zeroy,n.zerox-1,n.state)) {
-			State child = new State(swap(n,n.zerox-1,n.zeroy));
-			//Node child = new Node(swap(n,n.zerox-1,n.zeroy), n.zerox-1, n.zeroy,n,n.state[n.zeroy][n.zerox-1]);
-			//child.g=child.parent.g+1;
-			neighbors.add(child);
+		    State child = new State(swap(n,n.zerox-1,n.zeroy));
+		    //Node child = new Node(swap(n,n.zerox-1,n.zeroy), n.zerox-1, n.zeroy,n,n.state[n.zeroy][n.zerox-1]);
+		    //child.g=child.parent.g+1;
+		    neighbors.add(child);
 		}
 		if(validNeighbor(n.zeroy+1,n.zerox,n.state)) {
-			State child = new State(swap(n,n.zerox,n.zeroy+1));
-			//Node child = new Node(swap(n,n.zerox,n.zeroy+1), n.zerox, n.zeroy+1,n, n.state[n.zeroy+1][n.zerox]);
-			//child.g=child.parent.g+1;
-			neighbors.add(child);
+		    State child = new State(swap(n,n.zerox,n.zeroy+1));
+		    //Node child = new Node(swap(n,n.zerox,n.zeroy+1), n.zerox, n.zeroy+1,n, n.state[n.zeroy+1][n.zerox]);
+		    //child.g=child.parent.g+1;
+		    neighbors.add(child);
 		}
 		if(validNeighbor(n.zeroy,n.zerox+1,n.state)) {
-			State child = new State(swap(n,n.zerox+1,n.zeroy));
-			//Node child = new Node(swap(n,n.zerox+1,n.zeroy), n.zerox+1, n.zeroy,n,n.state[n.zeroy][n.zerox+1]);
-			//child.g=child.parent.g+1;
-			neighbors.add(child);
+		    State child = new State(swap(n,n.zerox+1,n.zeroy));
+		    //Node child = new Node(swap(n,n.zerox+1,n.zeroy), n.zerox+1, n.zeroy,n,n.state[n.zeroy][n.zerox+1]);
+		    //child.g=child.parent.g+1;
+		    neighbors.add(child);
 		}
 		return neighbors;
 	}
@@ -255,11 +255,11 @@ public class Ninteen {
 	private static int[] findZero(State s){
 		int[][] board = s.board;
 		for(int i = 0; i<6;i++){
-			for(int j = 0; j<6;j++) {
-				if (board[i][j] ==0) {
-					return new int[]{i,j};
-				}
+		    for(int j = 0; j<6;j++) {
+		    	if (board[i][j] ==0) {
+			    return new int[]{i,j};
 			}
+		    }
 		}
 		return new int[] {0,0};
 	}
@@ -270,62 +270,61 @@ public class Ninteen {
 	 * @return success or failure
 	 */
 	private static boolean aStar(MinPQ<Node> minPQ, HashMap<State, Node> hm){
-		while(!minPQ.isEmpty()){			
-			//choose a node in the frontier with the smallest (g+h) value
-			Node data = minPQ.remove();			
+	    while(!minPQ.isEmpty()){			
+		//choose a node in the frontier with the smallest (g+h) value
+		Node data = minPQ.remove();			
+		printBoard(data.state);			
+		
+		data.inFrontier = false; //it's no longer in the frontier
 			
-			printBoard(data.state);			
-			
-			data.inFrontier = false; //it's no longer in the frontier
-			
-			if(isGoal(data.state)) { //if it's a goal, then we're done
-				printPath(data);
-				return true;
-			}
-			
-			//Expand the chosen node
-			//getNeighbors returns an arraylist of at most 4 nodes
-			//These nodes contain the board state as a field
-			//thus we can create a new state from these nodes, and then test to see if that state is
-			//in the hashmap already or not
-			for(State neighbor: getNeighbors(data)){ 
-				//If the neighbor state is a new state that hasn't been seen before
-				if(!hm.containsKey(neighbor)) {
-					int[] arr = findZero(neighbor);
-					Node n = new Node(neighbor.board, arr[1], arr[0],data);
-					n.parent = data; //set parent
-					n.g = data.g+1; //set new path
-					n.inFrontier = true; //add it to the frontier
-					n.h = heuristic(n.state); //calculate the heuristic value of the neighbor
-					minPQ.add(n); //add it to the priority queue
-					hm.put(neighbor, n); //add it to the hashmap
-				}
-				//same state already exists
-				else if(hm.containsKey(neighbor)){
-					Node old = hm.get(neighbor);
-					//if old node is in the frontier AND the new node has a lower f value
-					if(old.inFrontier && ((old.g+old.h) > (heuristic(neighbor.board)+data.g+1))){ 
-						int[] arr = findZero(neighbor);
-						old.parent = data; //update the node to have the new parent 
-						old.g = data.g+1; //update to the new g
-						old.h = heuristic(neighbor.board); //update to the new h
-						old.zerox = arr[1]; //update x
-						old.zeroy = arr[0]; //update y
-						hm.replace(neighbor, old); //replace the old node in the hashmap
-						minPQ.update(old); //update the priority of the old node
-					} 
-					//else the state has already been visited (in hash + no longer in frontier)
-				}
-			}
+		if(isGoal(data.state)) { //if it's a goal, then we're done
+		    printPath(data);
+		    return true;
 		}
-		return false;
+			
+		//Expand the chosen node
+		//getNeighbors returns an arraylist of at most 4 nodes
+		//These nodes contain the board state as a field
+		//thus we can create a new state from these nodes, and then test to see if that state is
+		//in the hashmap already or not
+		for(State neighbor: getNeighbors(data)){ 
+		    //If the neighbor state is a new state that hasn't been seen before
+		    if(!hm.containsKey(neighbor)) {
+		        int[] arr = findZero(neighbor);
+		        Node n = new Node(neighbor.board, arr[1], arr[0],data);
+		        n.parent = data; //set parent
+		        n.g = data.g+1; //set new path
+		        n.inFrontier = true; //add it to the frontier
+		        n.h = heuristic(n.state); //calculate the heuristic value of the neighbor
+		        minPQ.add(n); //add it to the priority queue
+		        hm.put(neighbor, n); //add it to the hashmap
+		    }
+		    //same state already exists
+		    else if(hm.containsKey(neighbor)){
+		        Node old = hm.get(neighbor);
+		        //if old node is in the frontier AND the new node has a lower f value
+		        if(old.inFrontier && ((old.g+old.h) > (heuristic(neighbor.board)+data.g+1))){ 
+		     	    int[] arr = findZero(neighbor);
+		    	    old.parent = data; //update the node to have the new parent 
+			    old.g = data.g+1; //update to the new g
+			    old.h = heuristic(neighbor.board); //update to the new h
+			    old.zerox = arr[1]; //update x
+			    old.zeroy = arr[0]; //update y
+			    hm.replace(neighbor, old); //replace the old node in the hashmap
+			    minPQ.update(old); //update the priority of the old node
+			 } 
+			 //else the state has already been visited (in hash + no longer in frontier
+		    }
+		}
+	    }
+	    return false;
 	}
 	public static void main(String args[]) {
 		int[][] board = new int[6][6]; //create the board
 		board = initBoard(board); //initialize it with the read-in input
 		if(isGoal(board)) { //check to see if it's a goal already
-			System.out.println("No swaps, start state is a success! :D");
-			System.exit(0);
+		    System.out.println("No swaps, start state is a success! :D");
+		    System.exit(0);
 		}
 		MinPQ<Node> pq = new MinPQ<Node>();		
 		Node root = new Node(board,initZeroX, initZeroY, null);
